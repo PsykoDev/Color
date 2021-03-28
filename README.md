@@ -1,4 +1,4 @@
-# Color
+# Color C_CHAT + C_WHISPER
 
 Commands | infos
 --- | ---
