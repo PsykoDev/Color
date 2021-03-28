@@ -55,6 +55,7 @@ module.exports = function Color(mod) {
   })
   let bl = [9, 213, 214, 26]
   let safe = [0, 27, 3]
+  // C_CHAT color
   mod.hook("C_CHAT", 1, (e) => {
     if (bl.includes(e.channel)) return
     if (safe.includes(e.channel) && lock) return
@@ -113,6 +114,68 @@ module.exports = function Color(mod) {
     if (e.message.includes(":")) {
       mod.send("C_CHAT", 1, {
         channel: e.channel,
+        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(":", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+  })
+  // C_WHISPER color
+  mod.hook("C_WHISPER", 1, (e) => {
+    if (e.message.includes("ChatLinkAction param=")) return
+    // PERMA
+    if (e.message.includes("") && pink) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes("") && bleu) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes("") && red) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes("") && golden) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    //WITH KEY
+    if (e.message.includes(".")) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(".", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes(",")) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(",", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes(";")) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
+        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(";", "") + "</ChatLinkAction>",
+      })
+      return false
+    }
+    if (e.message.includes(":")) {
+      mod.send("C_WHISPER", 1, {
+        target: e.target,
         message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(":", "") + "</ChatLinkAction>",
       })
       return false
