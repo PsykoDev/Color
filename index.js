@@ -1,184 +1,73 @@
 /** @format */
 
 module.exports = function Color(mod) {
-  let pink = false,
-    bleu = false,
-    red = false,
-    golden = false,
-    lock = true
+  let colors = { pink: "#FF00DC", blue: "#56B4E9", red: "#FF0000", yellow: "#E69F00" }
+  let color = ""
+  let lock = true
+  let bl = [9, 213, 214, 26]
+  let safe = [0, 27, 3]
+
   mod.command.add("color", (arg) => {
     switch (arg) {
       case "unlock":
         lock = !lock
-        mod.command.message(`Perma Color Unlocked for ALL channel: ${lock ? "disabled" : "enabled"}`)
-        mod.command.message(`Stay safe !`)
-        break
+        mod.command.message(`Perma Color Unlocked for ALL channel: ${lock ? "disabled" : "enabled Stay safe !"}`)
+        return
       case "pink":
-        pink = !pink
-        bleu = false
-        red = false
-        golden = false
-        mod.command.message(`Perma Pink Color: ${pink ? "enabled" : "disabled"}`)
+        color = colors.pink
         break
       case "blue":
-        bleu = !bleu
-        pink = false
-        red = false
-        golden = false
-        mod.command.message(`Perma Blue Color: ${bleu ? "enabled" : "disabled"}`)
+        color = colors.blue
         break
       case "red":
-        red = !red
-        pink = false
-        bleu = false
-        golden = false
-        mod.command.message(`Perma Red Color: ${red ? "enabled" : "disabled"}`)
+        color = colors.red
         break
       case "gold":
-        golden = !golden
-        pink = false
-        bleu = false
-        red = false
-        mod.command.message(`Perma Gold Color: ${golden ? "enabled" : "disabled"}`)
+        color = colors.yellow
         break
       case "off":
-        pink = false
-        bleu = false
-        red = false
-        golden = false
-        mod.command.message(`Perma Color: disabled`)
+        color = ""
         break
       default:
         mod.command.message(`. pink / , blue / ; red / : yellow`)
-        break
+        return
     }
+    mod.command.message(`Perma Color: ${arg}`)
   })
-  let bl = [9, 213, 214, 26]
-  let safe = [0, 27, 3]
-  // C_CHAT color
+
+  function format_message(message) {
+    if (message.includes("ChatLinkAction param=")) return message
+    let temp_color = color
+    if (!color) {
+      if (message.includes(".")) {
+        temp_color = colors.pink
+        message = message.replace(".", "")
+      } else if (message.includes(",")) {
+        temp_color = colors.blue
+        message = message.replace(",", "")
+      } else if (message.includes(";")) {
+        temp_color = colors.red
+        message = message.replace(";", "")
+      } else if (message.includes(":")) {
+        temp_color = colors.yellow
+        message = message.replace(":", "")
+      }
+    }
+    if (temp_color) {
+      return '<FONT color="' + temp_color + '"><ChatLinkAction param="1#####0@0@name">' + message.replace(/<[^>]*>/g, "") + "</ChatLinkAction>"
+    }
+    return message
+  }
+
   mod.hook("C_CHAT", 1, (e) => {
     if (bl.includes(e.channel)) return
     if (safe.includes(e.channel) && lock) return
-    if (e.message.includes("ChatLinkAction param=")) return
-    // PERMA
-    if (e.message.includes("") && pink) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && bleu) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && red) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && golden) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    //WITH KEY
-    if (e.message.includes(".")) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(".", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(",")) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(",", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(";")) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(";", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(":")) {
-      mod.send("C_CHAT", 1, {
-        channel: e.channel,
-        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(":", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
+    e.message = format_message(e.message)
+    return true
   })
-  // C_WHISPER color
+
   mod.hook("C_WHISPER", 1, (e) => {
-    if (e.message.includes("ChatLinkAction param=")) return
-    // PERMA
-    if (e.message.includes("") && pink) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && bleu) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && red) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes("") && golden) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace("", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    //WITH KEY
-    if (e.message.includes(".")) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#FF00DC"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(".", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(",")) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#56B4E9"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(",", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(";")) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#FF0000"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(";", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
-    if (e.message.includes(":")) {
-      mod.send("C_WHISPER", 1, {
-        target: e.target,
-        message: '<FONT color="#E69F00"><ChatLinkAction param="1#####0@0@name">' + e.message.replace(/<[^>]*>/g, "").replace(":", "") + "</ChatLinkAction>",
-      })
-      return false
-    }
+    e.message = format_message(e.message)
+    return true
   })
 }
