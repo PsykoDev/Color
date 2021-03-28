@@ -11,6 +11,7 @@ off | disable perma color
 unlock | unlock color in ALL channel " public "
 
 ---
-or you can use . or , or ; or : during your sentence to set your color in your message when you want <br>
-. pink / , blue / ; red / : yellow
+Or you can use . or , or ; or : during your sentence to set your color in your message when you want. <br>
+. pink / , blue / ; red / : yellow <br>
+Escape for linked Item / Map / Pos without color <br>
 ---
