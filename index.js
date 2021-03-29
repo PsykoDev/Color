@@ -10,6 +10,7 @@ module.exports = function Color(mod) {
   mod.command.add("color", (arg) => {
     switch (arg) {
       case "unlock":
+      case "lock":
         lock = !lock
         mod.command.message(`Perma Color Unlocked for ALL channel: ${lock ? "disabled" : "enabled Stay safe !"}`)
         return
@@ -54,9 +55,13 @@ module.exports = function Color(mod) {
       }
     }
     if (temp_color) {
-      return '<FONT color="' + temp_color + '"><ChatLinkAction param="1#####0@0@name">' + message.replace(/<[^>]*>/g, "") + "</ChatLinkAction>"
+      let reg_msg = message
+        .replace(/<[^>]*>/g, "")
+        .replace(/&lt/g, "<")
+        .replace(/&gt/g, ">")
+      return '<FONT color="' + temp_color + '"><ChatLinkAction param="1#####0@0@name">' + reg_msg + "</ChatLinkAction>"
     }
-    return message
+    return message.replace(/&lt/g, "<").replace(/&gt/g, ">")
   }
 
   mod.hook("C_CHAT", 1, (e) => {
