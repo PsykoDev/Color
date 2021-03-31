@@ -3,11 +3,11 @@
         "README.md": "319d27be95e548486b9b6ee161d62c15367a53e4692ea36cf2d1ff4f0b6e4771",
         "config.json": {
             "overwrite": false,
-            "hash": "00f04777b9f4db5f17e88c5aef9dda3285e349751b4308acc57d1c24f4c02d2a"
+            "hash": "2679ace81de101701dce1759b40624ea79689b0d19cdd05d4bb9b2b869073e8b"
         },
         "index.js": "b5a4305893bd5121b614af4017405b3f67b5e4cd627c7a07cb044e7b76bdd556",
         "module.json": "887f00a7d4dca9951a3cd04a402cd79fdf40ee7e4492528d57fa10966527558a",
-        "settings.js": "21b8d50f269bf1210ed9c7d6f479cbac54b70545663c8d0a51625ce74965ad79"
+        "settings.js": "0a0854627e3c1a53299dfb6d6abab0c9ebf82b14565424bc7b6c37b4b1be740a"
     },
     "defs": {
         "C_CHAT": 1,
