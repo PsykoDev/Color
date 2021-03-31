@@ -2,7 +2,7 @@
 
 module.exports = function Color(mod) {
   let color = ""
-  const { command, game, settings, hook } = mod
+  const { command, game, settings } = mod
   game.on("enter_game", () => {
     settings.lock = false
   })
@@ -82,14 +82,14 @@ module.exports = function Color(mod) {
     return message.replace(/&lt/g, "<").replace(/&gt/g, ">")
   }
 
-  hook("C_CHAT", 1, (e) => {
+  mod.hook("C_CHAT", 1, (e) => {
     if (settings.bl.includes(e.channel)) return
     if (settings.safe.includes(e.channel) && settings.lock) return
     e.message = format_message(e.message)
     return true
   })
 
-  hook("C_WHISPER", 1, (e) => {
+  mod.hook("C_WHISPER", 1, (e) => {
     e.message = format_message(e.message)
     return true
   })
