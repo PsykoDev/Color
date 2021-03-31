@@ -2,9 +2,10 @@
 
 module.exports = function Color(mod) {
   let colors = { pink: "#FF00DC", blue: "#56B4E9", red: "#FF0000", yellow: "#E69F00", grey: "#A0A0A0" }
-  let colore = ["#FF00DC", "#56B4E9", "#FF0000", "#E69F00"]
+  let colore = ["#F0FF89", "#FFFFFF", "#AAA7FF", "#0196FF", "#40FB40", "#C37A81", "#FF7D00", "#FF7EFF", "#D5FFC6", "#D5FFC6", "#FFB9B9", "#80DCAB", "#12B581", "#D9D9D9", "#FFB368", "#FF4F88", "#ED145B", "#FF4F88", "#FFF799", "#EE1C24", "#40FB40", "#FF6565", "#EE1C24", "#FFE03F", "#FFE03F", "#FFE03F"]
   let color = ""
   let lock = true
+  let ran = false
   let bl = [9, 213, 214, 26]
   let safe = [0, 27, 3]
 
@@ -31,8 +32,10 @@ module.exports = function Color(mod) {
         color = colors.grey
         break
       case "random":
+        ran = !ran
+        mod.command.message(`Random Color: ${ran ? "enabled" : "disabled"}`)
         color = colore[Math.floor(Math.random() * colore.length)]
-        break
+        return
       case "off":
         color = ""
         break
@@ -64,12 +67,19 @@ module.exports = function Color(mod) {
         message = message.replace("§", "")
       }
     }
-    if (temp_color) {
+    if (temp_color && ran === false) {
       let reg_msg = message
         .replace(/<[^>]*>/g, "")
         .replace(/&lt/g, "<")
         .replace(/&gt/g, ">")
       return '<FONT color="' + temp_color + '"><ChatLinkAction param="1#####0@0@name">' + reg_msg + "</ChatLinkAction>"
+    } else if (ran === true) {
+      let temp_colorR = colore[Math.floor(Math.random() * colore.length)]
+      let reg_msg = message
+        .replace(/<[^>]*>/g, "")
+        .replace(/&lt/g, "<")
+        .replace(/&gt/g, ">")
+      return '<FONT color="' + temp_colorR + '"><ChatLinkAction param="1#####0@0@name">' + reg_msg + "</ChatLinkAction>"
     }
     return message.replace(/&lt/g, "<").replace(/&gt/g, ">")
   }
