@@ -8,6 +8,7 @@ blue | write all time in blue
 red | write all time in red
 gold | write all time in gold
 grey | write all time in grey
+random | set a random color after an sentence
 off | disable perma color
 unlock | unlock color in ALL channel " public "
 
