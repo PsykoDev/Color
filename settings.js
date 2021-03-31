@@ -3,7 +3,6 @@
 "use strict"
 
 const DefaultSettings = {
-  enabled: true,
   lock: true,
   ran: false,
   bl: [9, 213, 214, 26],

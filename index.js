@@ -2,14 +2,17 @@
 
 module.exports = function Color(mod) {
   let color = ""
-  const settings = mod.settings
+  const { command, game, settings, hook } = mod
+  game.on("enter_game", () => {
+    settings.lock = false
+  })
 
-  mod.command.add("color", (arg) => {
+  command.add("color", (arg) => {
     switch (arg) {
       case "unlock":
       case "lock":
         settings.lock = !settings.lock
-        mod.command.message(`Perma Color Unlocked for ALL channel: ${settings.lock ? "disabled" : "enabled Stay safe !"}`)
+        command.message(`Perma Color Unlocked for ALL channel: ${settings.lock ? "disabled" : "enabled Stay safe !"}`)
         return
       case "pink":
         color = settings.colors.pink
@@ -28,17 +31,17 @@ module.exports = function Color(mod) {
         break
       case "random":
         settings.ran = !settings.ran
-        mod.command.message(`Random Color: ${settings.ran ? "enabled" : "disabled"}`)
+        command.message(`Random Color: ${settings.ran ? "enabled" : "disabled"}`)
         color = settings.colore[Math.floor(Math.random() * settings.colore.length)]
         return
       case "off":
         color = ""
         break
       default:
-        mod.command.message(`. pink / , blue / ; red / : yellow / § : grey`)
+        command.message(`. pink / , blue / ; red / : yellow / § : grey`)
         return
     }
-    mod.command.message(`Perma Color: ${arg}`)
+    command.message(`Perma Color: ${arg}`)
   })
 
   function format_message(message) {
@@ -79,14 +82,14 @@ module.exports = function Color(mod) {
     return message.replace(/&lt/g, "<").replace(/&gt/g, ">")
   }
 
-  mod.hook("C_CHAT", 1, (e) => {
+  hook("C_CHAT", 1, (e) => {
     if (settings.bl.includes(e.channel)) return
     if (settings.safe.includes(e.channel) && settings.lock) return
     e.message = format_message(e.message)
     return true
   })
 
-  mod.hook("C_WHISPER", 1, (e) => {
+  hook("C_WHISPER", 1, (e) => {
     e.message = format_message(e.message)
     return true
   })

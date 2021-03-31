@@ -1,54 +1,17 @@
 {
-    "version": 103.2,
-    "data": {
-        "enabled": true,
-        "lock": true,
-        "ran": false,
-        "bl": [
-            9,
-            213,
-            214,
-            26
-        ],
-        "safe": [
-            0,
-            27,
-            3
-        ],
-        "colors": {
-            "pink": "#FF00DC",
-            "blue": "#56B4E9",
-            "red": "#FF0000",
-            "yellow": "#E69F00",
-            "grey": "#A0A0A0"
-        },
-        "colore": [
-            "#F0FF89",
-            "#FFFFFF",
-            "#AAA7FF",
-            "#0196FF",
-            "#40FB40",
-            "#C37A81",
-            "#FF7D00",
-            "#FF7EFF",
-            "#D5FFC6",
-            "#D5FFC6",
-            "#FFB9B9",
-            "#80DCAB",
-            "#12B581",
-            "#D9D9D9",
-            "#FFB368",
-            "#FF4F88",
-            "#ED145B",
-            "#FF4F88",
-            "#FFF799",
-            "#EE1C24",
-            "#40FB40",
-            "#FF6565",
-            "#EE1C24",
-            "#FFE03F",
-            "#FFE03F",
-            "#FFE03F"
-        ]
-    }
+  "version": 103.2,
+  "data": {
+    "lock": true,
+    "ran": false,
+    "bl": [9, 213, 214, 26],
+    "safe": [0, 27, 3],
+    "colors": {
+      "pink": "#FF00DC",
+      "blue": "#56B4E9",
+      "red": "#FF0000",
+      "yellow": "#E69F00",
+      "grey": "#A0A0A0"
+    },
+    "colore": ["#F0FF89", "#FFFFFF", "#AAA7FF", "#0196FF", "#40FB40", "#C37A81", "#FF7D00", "#FF7EFF", "#D5FFC6", "#D5FFC6", "#FFB9B9", "#80DCAB", "#12B581", "#D9D9D9", "#FFB368", "#FF4F88", "#ED145B", "#FF4F88", "#FFF799", "#EE1C24", "#40FB40", "#FF6565", "#EE1C24", "#FFE03F", "#FFE03F", "#FFE03F"]
+  }
 }
