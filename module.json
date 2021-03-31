@@ -1,0 +1,15 @@
+{
+    "disableAutoUpdate": false,
+    "name": "Color",
+    "author": "PsykoDev",
+    "version": "103.2",
+    "options": {
+        "niceName": "Color",
+        "guiName": "Color",
+        "settingsVersion": 103.2,
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings.js"
+    },
+    "servers": ["https://raw.githubusercontent.com/PsykoDev/Color/master/"],
+    "description": "Write in color all time."
+}

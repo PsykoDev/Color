@@ -1,40 +1,35 @@
 /** @format */
 
 module.exports = function Color(mod) {
-  let colors = { pink: "#FF00DC", blue: "#56B4E9", red: "#FF0000", yellow: "#E69F00", grey: "#A0A0A0" }
-  let colore = ["#F0FF89", "#FFFFFF", "#AAA7FF", "#0196FF", "#40FB40", "#C37A81", "#FF7D00", "#FF7EFF", "#D5FFC6", "#D5FFC6", "#FFB9B9", "#80DCAB", "#12B581", "#D9D9D9", "#FFB368", "#FF4F88", "#ED145B", "#FF4F88", "#FFF799", "#EE1C24", "#40FB40", "#FF6565", "#EE1C24", "#FFE03F", "#FFE03F", "#FFE03F"]
   let color = ""
-  let lock = true
-  let ran = false
-  let bl = [9, 213, 214, 26]
-  let safe = [0, 27, 3]
+  const settings = mod.settings
 
   mod.command.add("color", (arg) => {
     switch (arg) {
       case "unlock":
       case "lock":
-        lock = !lock
-        mod.command.message(`Perma Color Unlocked for ALL channel: ${lock ? "disabled" : "enabled Stay safe !"}`)
+        settings.lock = !settings.lock
+        mod.command.message(`Perma Color Unlocked for ALL channel: ${settings.lock ? "disabled" : "enabled Stay safe !"}`)
         return
       case "pink":
-        color = colors.pink
+        color = settings.colors.pink
         break
       case "blue":
-        color = colors.blue
+        color = settings.colors.blue
         break
       case "red":
-        color = colors.red
+        color = settings.colors.red
         break
       case "gold":
-        color = colors.yellow
+        color = settings.colors.yellow
         break
       case "grey":
-        color = colors.grey
+        color = settings.colors.grey
         break
       case "random":
-        ran = !ran
-        mod.command.message(`Random Color: ${ran ? "enabled" : "disabled"}`)
-        color = colore[Math.floor(Math.random() * colore.length)]
+        settings.ran = !settings.ran
+        mod.command.message(`Random Color: ${settings.ran ? "enabled" : "disabled"}`)
+        color = settings.colore[Math.floor(Math.random() * settings.colore.length)]
         return
       case "off":
         color = ""
@@ -51,30 +46,30 @@ module.exports = function Color(mod) {
     let temp_color = color
     if (!color) {
       if (message.includes(".")) {
-        temp_color = colors.pink
+        temp_color = settings.colors.pink
         message = message.replace(".", "")
       } else if (message.includes(",")) {
-        temp_color = colors.blue
+        temp_color = settings.colors.blue
         message = message.replace(",", "")
       } else if (message.includes(";")) {
-        temp_color = colors.red
+        temp_color = settings.colors.red
         message = message.replace(";", "")
       } else if (message.includes(":")) {
-        temp_color = colors.yellow
+        temp_color = settings.colors.yellow
         message = message.replace(":", "")
       } else if (message.includes("§", "")) {
-        temp_color = colors.grey
+        temp_color = settings.colors.grey
         message = message.replace("§", "")
       }
     }
-    if (temp_color && ran === false) {
+    if (temp_color && settings.ran === false) {
       let reg_msg = message
         .replace(/<[^>]*>/g, "")
         .replace(/&lt/g, "<")
         .replace(/&gt/g, ">")
       return '<FONT color="' + temp_color + '"><ChatLinkAction param="1#####0@0@name">' + reg_msg + "</ChatLinkAction>"
-    } else if (ran === true) {
-      let temp_colorR = colore[Math.floor(Math.random() * colore.length)]
+    } else if (settings.ran === true) {
+      let temp_colorR = settings.colore[Math.floor(Math.random() * settings.colore.length)]
       let reg_msg = message
         .replace(/<[^>]*>/g, "")
         .replace(/&lt/g, "<")
@@ -85,8 +80,8 @@ module.exports = function Color(mod) {
   }
 
   mod.hook("C_CHAT", 1, (e) => {
-    if (bl.includes(e.channel)) return
-    if (safe.includes(e.channel) && lock) return
+    if (settings.bl.includes(e.channel)) return
+    if (settings.safe.includes(e.channel) && settings.lock) return
     e.message = format_message(e.message)
     return true
   })

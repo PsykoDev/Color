@@ -1,0 +1,15 @@
+{
+    "files": {
+        "config.json": {
+            "overwrite": false,
+            "hash": "ba8d4882913082d16bcd70e1b5857ed63a98a2f85d00756a4c5c66d278c9c100"
+        },
+        "index.js": "b3c0d77d2d3ee22959c7ccf1918054bab27bb953dfcc8e22a7ec2d97b81c1a0e",
+        "module.json": "887f00a7d4dca9951a3cd04a402cd79fdf40ee7e4492528d57fa10966527558a",
+        "settings.js": "47b6b1c6e16b87437d9c49ff8eadf55fb719bf11a1b91b44d43614511a34709a"
+    },
+    "defs": {
+        "C_CHAT": 1,
+        "C_WHISPER": 1
+    }
+}
